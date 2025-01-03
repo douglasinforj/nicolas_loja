@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . '/../app/controllers/ProductController.php';
 require_once __DIR__ . '/../app/controllers/CartController.php';
 require_once __DIR__ . '/../app/controllers/ThankYouController.php';
@@ -7,13 +8,16 @@ $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 switch ($uri) {
     case '/':
-        (new ProductController())->index();
+        (new App\Controllers\ProductController())->listProducts();
         break;
     case '/add-to-cart':
-        (new CartController())->add();
+        (new App\Controllers\CartController())->add();
+        break;
+    case '/cart':
+        (new App\Controllers\CartController())->viewCart();
         break;
     case '/thank-you':
-        (new ThankYouController())->index();
+        (new App\Controllers\ThankYouController())->index();
         break;
     default:
         http_response_code(404);
