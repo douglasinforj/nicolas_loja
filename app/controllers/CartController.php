@@ -30,4 +30,27 @@ class CartController
         header('Location: /');
         exit;
     }
+
+    public function viewCart()
+    {
+        session_start();
+
+        $cart = $_SESSION['cart'] ?? [];
+        $products = Product::getAll();
+        $cartProducts = [];
+
+        foreach ($cart as $productId => $quantity) {
+            if (isset($products[$productId])) {
+                $cartProducts[] = [
+                    'id' => $productId,
+                    'name' => $products[$productId]['name'],
+                    'price' => $products[$productId]['price'],
+                    'quantity' => $quantity,
+                    'subtotal' => $products[$productId]['price'] * $quantity,
+                ];
+            }
+        }
+
+        include __DIR__ . '/../views/cart.php';
+    }
 }
