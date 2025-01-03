@@ -14,7 +14,7 @@ switch ($uri) {
         (new App\Controllers\CartController())->add();
         break;
     case '/cart':
-        (new App\Controllers\CartController())->viewCart();
+        (new App\Controllers\CartController())->viewCart();      //Atualizando a rota aqui para o carrinho
         break;
     case '/thank-you':
         (new App\Controllers\ThankYouController())->index();
